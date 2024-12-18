@@ -1,0 +1,24 @@
+[data-char] {
+  width: 1ch;
+  height: 1lh;
+  overflow: hidden;
+}
+[data-char] span {
+  display: inline-block;
+  white-space: break-spaces;
+  word-break: break-word;
+}
+[data-char] span {
+  --duration: 0.24;
+  --delay: calc(
+    (
+      sin((var(--char-index) / var(--char-total)) * 90deg) *
+      (var(--duration) * 1)
+    )
+  );
+}
+a:is(:hover, :focus-visible) [data-char] span {
+  transition: translate calc(var(--duration) * 1s)
+    calc(0.1s + (var(--delay) * 1s)) steps(calc(var(--steps) + 1));
+  translate: 0 calc(100% - 1lh);
+}
